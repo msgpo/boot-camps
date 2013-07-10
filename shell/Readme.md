@@ -2,29 +2,58 @@
 
 **Material by Paul Wilson, Milad Fatenejad, Sasha Wood, and Radhika Khetani**
 
-# What is the shell? How do I access the shell?
+**(Modified for IU Bootcamp by Jeff Shelton)**
 
-The *shell* is a program that presents a command line interface
-which allows you to control your computer using commands entered
-with a keyboard instead of controlling graphical user interfaces
-(GUIs) with a mouse/keyboard combination.
-
-Use a browser to open the tutorial on github, located at:
+This will be an interactive session, but if you would like to
+follow along with the tutorial notes, direct your browser to:
 
     https://github.com/synesthesiam/boot-camps/tree/2013-07-11-iub
+    
+Click on the directory named `shell`. Then scroll down to the 
+section titled "Readme.md"
 
-Click on the directory named `shell`.
+# Overview
+
+In the next two days, we are going to introduce you to a number of 
+software applications that can be used to automate your scientific
+work, thus making you a more productive scientist. In general terms,
+these programs can be segmented into the following categories:
+
++ Shell -- Launch programs -- [ex: bash, bourne, DOS] 
++ Editor -- Edit text -- [ex: nano, vi, emacs, kate]
++ Language -- Write logic -- [ex: C, Perl, Python, R, MatLab, FORTRAN] 
++ Application Package -- Interface to existing logic -- 
+[ex: Rails, SQLAlchemy, numpy, matplotlib]
++ Version Control System -- Track and store information 
+-- [ex: Subversion, Mercurial, Git ]
++ Notebook Environment -- Program interactively
+-- [ex: Maple, Mathematica, IPython] 
+
+All this can be a bit overwhelming, so ask if you have a question. 
+Knowing syntax details will be of little use if you don't understand
+what a particular program is supposed to be doing for you. We will also
+see that many of these tools are like screwdrivers --- they can be 
+adventageously applied to problems that fall outside of their originally
+intended usage.
+
+# What is the shell?
+
+The *shell* is a program that allows you to control your computer
+using text commands entered from a keyboard. This approach permits
+greater flexibility in selecting files and launching programs than
+is allowed with a graphical user interface (GUIs) relying on a 
+mouse/keyboard combination.
 
 A *terminal* is a program you run that gives you access to the
 shell. There are many different terminal programs that vary across
 operating systems.
 
-There are many reasons to learn about the shell. In my opinion, the
-most important reasons are that:
+There are many reasons to learn about the shell. The most important 
+reasons are that:
 
 1.  It is very common to encounter the shell and
     command-line-interfaces in scientific computing, so you will
-    probably have to learn it eventually
+    probably have to learn it eventually.
 
 2.  The shell is a really powerful way of interacting with your
     computer. GUIs and the shell are complementary - by knowing both
@@ -41,33 +70,38 @@ lot of the basic ones, work across the various shells but many things
 are different. I recommend sticking with bash and learning it well.
 ([Here is a link for more information](http://en.wikipedia.org/wiki/Bash_(Unix_shell))
 
-To open a terminal, just single click on the "Terminal" icon on the
-Desktop.
+### How do I access the shell?
 
-# The Example: Manipulating Experimental Data Files
-
-We will spend most of our time learning about the basics of the shell
-by manipulating some experimental data from a hearing test. To get
-the data for this test, you will need internet access. Just enter the
-command:
-
-    git clone -b 2013-07-11-iub git://github.com/synesthesiam/boot-camps.git
-
-This command will grab all of the data needed for this workshop from
-the internet.  (We will talk about the `git` command later in the
-workshop.)
+To open a terminal, double-click on the "LXTerminal" icon located in the
+upper left hand corner of the virtual machine desktop.
 
 # Let's get started
 
 One very basic command is `echo`. This command just prints text to
 the terminal. Try the command:
 
-    echo Hello, World
+    echo Hello, World!
 
-Then press enter. You should see the text "Hello, World" printed back
+Then press enter. You should see the text "Hello, World!" printed back
 to you. The echo command is useful for printing from a shell script,
 for displaying variables, and for generating known values to pass
 to other programs.
+
+### Quotation Marks
+
+There are three types of quotation marks used in the bash shell. These are:
+
++ 'single quotes'
++ "double quotes"
++ \`back ticks`
+
+Each of these quotation marks has a specific meaning. We start with single
+quotes. Enclosing characters in single quotes preserves the literal value
+of each character within the quotes.
+
+    echo 'Hello, World!'
+	
+We'll return to double quotes and back ticks a little later on.
 
 ## Moving around the file system
 
@@ -96,7 +130,7 @@ command `whoami`.
 When you enter the `ls` command lists the contents of the current
 directory. There are several items in the home directory, notice that
 they are all colored blue. This tells us that all of these items are
-directories as opposed to files.
+directories, as opposed to files.
 
 Lets create an empty file using the `touch` command. Enter the
 command:
@@ -104,7 +138,7 @@ command:
     touch testfile
 
 Then list the contents of the directory again. You should see that a
-new entry, called `testfile`, exists. It is colored white meaning that
+new entry, called `testfile`, exists. It is colored green meaning that
 it is a file, as opposed to a directory. The `touch` command just
 creates an empty file.
 
@@ -130,12 +164,23 @@ command:
 The `rm` command can be used to remove files. If you enter `ls` again,
 you will see that `testfile` is gone.
 
+We will spend most of our time learning about the basics of the shell
+by manipulating some experimental data. To load this data into your computer,
+you will need internet access. Just enter the command:
+
+    git clone -b 2013-07-11-iub git://github.com/synesthesiam/boot-camps.git
+
+This command grabs all of the data needed for this workshop.  (We will talk
+about the `git` command later in the workshop.) It will take several minutes for
+all of the data to load. Once the data transfer is complete, you should see a 
+directory labeled `boot-camps` in your home directory when you
+issue the `ls` command.
 
 ## Changing Directories
 
-Now, let's move to a different directory. The command `cd` (change
-directory) is used to move around. Let's move into the `boot-camps`
-directory. Enter the following command:
+Now, let's move from our home directory to a different directory.
+The command `cd` (change directory) is used to move around. Move into
+the `boot-camps` directory by entering the following command:
 
     cd boot-camps
 
@@ -146,7 +191,7 @@ the directory containing the data for the shell tutorial:
     cd shell
 
 Now use the `ls` command to see what is inside this directory. You
-will see that there is an entry which is green. This means that this
+will see that there is an entry which is lime green. This means that this
 is an executable. If you use `ls -F` you will see that this file ends
 with a star.
 
@@ -180,14 +225,22 @@ referring back to the manual page frequently.
 **Short Exercise**
 
 1. Use the manual page for `ls` to guess what you would expect from
-using the arguments `-l`, '-t', '-r' at the same time.
-2. Try the following and see if you can figure out what they do, either by examining the results or consulting the manual page.
+using the arguments `-l`, `-t`, `-r` at the same time.
+2. Try the following and see if you can figure out what they do, either by 
+examining the results or consulting the manual page.
    * `ls -lS` (equivalent to `ls -l -S`)
    * `ls -lt` (equivalent to `ls -l -t`)
    * `ls -1`  (that's the number one, not a letter 'ell')
 
 * * * *
 
+You may note that some arguments start with a single dash, while others
+start with a double dash. The general guideline is that single dash arguments
+consist of a single character, while double dashes are associated with
+arguments of more than one character. Thus the command `ls -F` has a single
+dash, while the equivalent command `ls --classify` has two dashes. However,
+this "rule" is not followed by all bash commands. So if in doubt, refer to 
+the manual page!
 
 ## Examining the contents of other directories
 
@@ -216,10 +269,10 @@ the intermediate directory.
 ## Full vs. Relative Paths
 
 The `cd` command takes an argument which is the directory
-name. Directories can be specified using either a *relative* path a
+name. Directories can be specified using either a *relative* path or a
 full *path*. The directories on the computer are arranged into a
-hierarchy. The full path tells you where a directory is in that
-hierarchy. Navigate to the home directory. Now, enter the `pwd`
+hierarchy. The full path tells you where a directory is located in the
+file system hierarchy. Navigate to the home directory. Now, enter the `pwd`
 command and you should see:
 
     /home/swc
@@ -240,11 +293,11 @@ earlier that the command:
 
     cd boot-camps/shell
 
-had the same effect - it took us to the `shell` directory. But,
+had the same effect -- it also took us to the `shell` directory. But,
 instead of specifying the full path
 (`/home/swc/boot-camps/shell`), we specified a *relative path*. In
 other words, we specified the path relative to our current
-directory. A full path always starts with a `/`. A relative path does
+directory. A full path **always** starts with a `/`. A relative path does
 not. You can usually use either a full path or a relative path
 depending on what is most convenient. If we are in the home directory,
 it is more convenient to just enter the relative path since it
@@ -298,7 +351,7 @@ your convenience.
 
 ### Our data set: Cochlear Implants
 
-A cochlear implant is a small electronic device that is surgically
+A cochlear implant (CI) is a small electronic device that is surgically
 implanted in the inner ear to give deaf people a sense of
 hearing. More than a quarter of a million people have them, but there
 is still no widely-accepted benchmark to measure their effectiveness.
@@ -311,7 +364,7 @@ report:
 3.  the narrowest range of frequencies they could discriminate
 
 To participate, subjects attended our laboratory and one of our lab
-techs played an audio sample, and recorded their data - when they
+techs played an audio sample, and recorded their data -- when they
 first heard the sound, or first heard a difference in the sound.  Each
 set of test results were written out to a text file, one set per file.
 Each participant has a unique subject ID, and a made-up subject name.
@@ -343,9 +396,9 @@ directory. The `*` character is a shortcut for "everything". Thus, if
 you enter `ls *`, you will see all of the contents of a given
 directory. Now try this command:
 
-    ls *1
+    ls *2
 
-This lists every file that ends with a `1`. This command:
+This lists every file that ends with a `2`. This command:
 
     ls /usr/bin/*.sh
 
@@ -373,14 +426,37 @@ between these two things.
 * * * *
 **Short Exercise**
 
-Do each of the following using a single `ls` command without
-navigating to a different directory.
+Do each of the following with a single `ls` command after
+navigating to your home directory.
 
-1.  List all of the files in `/bin` that contain the letter `a`
-2.  List all of the files in `/bin` that contain the letter `a` or the letter `b`
-3.  List all of the files in `/bin` that contain the letter `a` AND the letter `b`
+1.  List all of the files in `data/THOMAS` that contain the number `2`
+2.  List all of the files in `data/THOMAS` that contain the number `2` or the number `4`
+3.  List all of the files in `data/THOMAS` that contain the number `2` AND the number `4`
 
 * * * *
+
+Other wildcards include:
+
+| Wildcard  | Matches                                  |
+|:---------:|:----------------------------------------:|
+| *         | zero or more characters                  |
+| ?         | exactly one character                    |
+| [abcde]   | exactly one character from list          |
+| [a-e]     | exactly one character in the given range |
+| [!abcde]  | any character not in list                |
+| [!a-e]    | any character not in given range         |
+| {dog,cat} | exactly one word in list                 |
+
+* * * *
+**Short Exercise**
+
+Without navigating away from the `data/THOMAS` directory, list all of the files
+in `/bin` that contain the start with a letter in the range from
+`a` to `m`, have a second letter that is **not** in the range from `n` to `z`, 
+and conclude with the letter `p`.
+
+* * * *
+
 
 ### Tab Completion
 
@@ -440,8 +516,8 @@ then you could repeat command #260 by simply entering:
 * * * *
 **Short Exercise**
 
-1. Find the line number in your history for the last exercise (listing
-files in /bin) and reissue that command.
+1. Find the line number in your history for listing
+all `/data/THOMAS` files containing the number `2`,  and reissue that command.
 
 * * * *
 
@@ -509,10 +585,14 @@ in one of the default places for the program.
 ## Examining Files
 
 We now know how to switch directories, run programs, and look at the
-contents of directories, but how do we look at the contents of files?
+contents of directories, but how do we peek into the contents of files?
 
 The easiest way to examine a file is to just print out all of the
-contents using the program `cat`. Enter the following command:
+contents using the program `cat`. Why a program called `cat`? Well, the name stands
+for concatenate, and was originally intended to merge together multiple files.
+But, like a screwdriver, this program has multiple uses. And if we give it a
+single file as an input argument, the `cat` programs lists the file's contents
+in the teminal. Enter the following command:
 
     cat ex_data.txt
 
@@ -520,9 +600,8 @@ This prints out the contents of the `ex_data.txt` file. If you enter:
 
     cat ex_data.txt ex_data.txt
 
-It will print out the contents of `ex_data.txt` twice. `cat` just
-takes a list of file names and writes them out one after another (this
-is where the name comes from, `cat` is short for concatenate).
+It will print out the contents of `ex_data.txt` twice. The `cat` command just
+takes a list of file names and writes them out one after another.
 
 * * * *
 **Short Exercises**
@@ -537,7 +616,8 @@ is where the name comes from, `cat` is short for concatenate).
 * * * *
 
 `cat` is a terrific program, but when the file is really big, it can
-be annoying to use. The program, `less`, is useful for this
+be annoying to use. It allows no means for scrolling through the document. 
+A different program, `less`, is useful for this
 case. Enter the following command:
 
     less ~/boot-camps/shell/dictionary.txt
@@ -576,7 +656,6 @@ Use the commands we've learned so far to figure out how to search
 in reverse while using `less`.
 
 * * * *
-
 
 ## Redirection
 
@@ -704,7 +783,7 @@ Figure out how to get `wc` to print the length of the longest line in
 
 * * * *
 
-## The awesome power of the Pipe
+## The Awesome Power of the Pipe
 
 Suppose I wanted to only see the total number of character, words, and
 lines across the files `Bert/*` and `gerdal/*4*`. I don't want to
@@ -800,13 +879,15 @@ When you are back to the command line, enter the command:
 
     sort toBeSorted
 
-Notice that the names are now printed in alphabetical order.
+Notice that the names are now printed in alphabetical order. Do you
+think that the contents of the `toBeSorted` file were altered? How might you
+verify your answer?
 
 * * * *
 **Short Exercise**
 
 Use the `echo` command and the append operator, `>>`, to append your
-name to the file, then sort it and make a new file called Sorted.
+name to the `toBeSorted` file, then sort it and make a new file called Sorted.
 
 * * * *
 
@@ -872,7 +953,7 @@ you enter:
 
     ls -l ../smallest
 
-You will see that the file name is green and the permissions have changed.
+You will see that the file name is lime green and the permissions have changed.
 Congratulations, you just created your first shell script!
 
 # Searching files
@@ -886,19 +967,94 @@ discriminated. Lets list all of the ranges from the tests that Bert
 conducted:
 
     grep Range *
+	
+To eliminate case sensitivity, you can use the `-i` option:
+
+	grep -i ranGE *
+
+
+## Count Duplicates
+
+The number of *adjacent* repeated lines can be determined with the 
+`uniq` command. So we can determine how often each range has been 
+reported with
+
+	grep -h Range * | sort -n -k 2 | uniq -c
+	
+The `-h` option suppresses file names as matching lines of text 
+are printed.
+	
 
 * * * *
 **Short Exercise**
 
-Create an executable script called `smallestrange` in the `data`
+Create an executable script called `frequentranges` in the `data`
 directory, that is similar to the `smallest` script, but prints the
-file containing the file with the smallest Range. Use the commands
-`grep`, `sort`, and `tail` to do this.
+three most frequently occuring ranges. Use the commands
+`grep`, `sort`, `uniq` and `head` to do this.
 
 * * * *
 
 
-# Finding files
+# More Quotation Marks
+
+We know that the output of
+	
+	echo Hello, World!
+	
+is the same as that for 
+	
+	echo 'Hello, World!'
+	
+But we get an error if we enter
+
+	echo "Hello, World!"
+	
+Why is that? While single quotes interpret the contained text literally, 
+the double quotes tell bash to first interpret certain special characters 
+(dollar signs, backticks, backslashes and exclamation marks). And 
+as you may remember, the exclamation mark is interpreted by bash as a reference
+to the command history. So how might we use this feature? Type
+
+	DATADIR=~/boot-camps/shell/data
+
+Note that there are **no spaces** on either side of the equals sign. This
+creates  a shell variable named DATADIR that stores the location of our data
+directory. We append a dollar sign ($) to the front of the variable name to 
+retrieve its value:
+
+	echo $DATADIR
+	
+If we want to include this variable in a sentence, we might try
+
+	echo 'Our data is located in: $DATADIR'
+	
+As expected, we get a literal interpretation of the characters using single
+quotes. Let's try the same sentence in double quotes:
+
+	echo "Our data is located in: $DATADIR"
+
+This gives us what we want.
+
+Using backticks causes the enclosed text to be executed. So we can enter:
+
+	echo "Our working directory is: `pwd`"
+	
+or
+
+	echo "The name of this computer is `hostname`"
+	
+* * * *
+**Short Exercise**
+
+1. Jump to your home directory, using the command `cd`. Now use the shell variable DATADIR to perform
+a word count on all files in the `data\THOMAS` folder, without changing directories.
+
+2. Move to the `data` directory, making use of the `cd` command and the DATADIR shell variable.
+
+* * * *
+
+# Finding Files
 
 The `find` program can be used to find files based on arbitrary
 criteria. Navigate to the `data` directory and enter the following
@@ -911,9 +1067,15 @@ from the current directory. Let's exclude all of the directories:
 
     find . -type f -print
 
-This tells `find` to locate only files. Now try these commands:
+This tells `find` to locate only files. Now try this command:
 
     find . -type f -name "*1*"
+
+Why do we need quotes around `*1*`? Do the quote marks need to be double
+quotes?
+
+We can use logical operators to augment our search. For example:
+
     find . -type f -name "*1*" -or -name "*2*" -print
     find . -type f -name "*1*" -and -name "*2*" -print
 
@@ -946,9 +1108,9 @@ require a `find` command):
 
 1.  Find any file whose name is "NOTES" within `data` and delete it
 
-2.  Create a new directory called `cleaneddata`
+2.  Create a new directory called `cleandata`
 
-3.  Move all of the files within `data` to the `cleaneddata` directory
+3.  Move all of the files within `data` to the `cleandata` directory
 
 4.  Rename all of the files to ensure that they end in `.txt` (note:
     it is ok for the file name to end in `.txt.txt`
